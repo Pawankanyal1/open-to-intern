@@ -1,39 +1,39 @@
-# TOPIC: Middleware2
+Thorium
+Open to Intern Project Requirement
+Key points
+Create a group database groupXDatabase. You can clean the db you previously used and resue that.
+This time each group should have a single git branch. Coordinate amongst yourselves by ensuring every next person pulls the code last pushed by a team mate. You branch will be checked as part of the demo. Branch name should follow the naming convention project/internshipGroupX
+Follow the naming conventions exactly as instructed. The backend code will be integrated with the front-end application which means any mismatch in the expected request body will lead to failure in successful integration.
+Models
+College Model
+{ name: { mandatory, unique, example iith}, fullName: {mandatory, example `Indian Institute of Technology, Hyderabad`}, logoLink: {mandatory}, isDeleted: {boolean, default: false} }
+Intern Model
+{ name: {mandatory}, email: {mandatory, valid email, unique}, mobile: {mandatory, valid mobile number, unique}, collegeId: {ObjectId, ref to college model, isDeleted: {boolean, default: false}}
+POST /functionup/colleges
+Create a college - a document for each member of the group
 
-## Authentication with JWT
-- Token generation
-- Token verification
+The logo link will be provided to you by the mentors. This link is a s3 (Amazon's Simple Service) url. Try accessing the link to see if the link is public or not.
 
-## Assignment
-- For this assignment you have to create a new branch - assignment/auth-2
-- Your user document should look like this
-```
- 	{
-    "_id" : ObjectId("6226e3d2b98f22b349ca58be"),
-    "firstName" : "Sabiha",
-    "lastName" : "Khan",
-    "mobile" : "9898909087",
-    "emailId" : "sk@gmail.com",
-    "password" : "password123",
-    "gender" : "female",
-	"isDeleted": false, //default value is false 
-    "age" : 12,
-    "createdAt" : ISODate("2022-03-08T05:04:18.737Z"),
-    "updatedAt" : ISODate("2022-03-08T05:04:18.737Z"),
-    "__v" : 0
-}
-```
+Endpoint: BASE_URL/functionup/colleges
 
+POST /functionup/interns
+Create a document for an intern.
 
-- Write a POST api /users to register a user from the user details in request body. 
-- Write a POST api /login to login a user that takes user details like email and password from the request body. If the credentials don't match with any user's data return a suitable error.
-On successful login, generate a JWT token and return it in response body.
-- Write a GET api /users/<userId> to fetch user details. Pass the userId as path param in the url. Check that request must contain **x-auth-token** header. If absent, return a suitable error.
-If present, check that the token is valid.
-- Write a PUT api /users/<userId> to update user details. Pass the userId as path param in the url and update the attributes received in the request body. Check that request must contain x-auth-token header. If absent, return a suitable error.
-- Write a DELETE api /users/<userId> that takes the userId in the path params and marks the isDeleted attribute for a user as true. Check that request must contain x-auth-token header. If absent, return a suitable error.
-- Once, all the apis are working fine, move the authentication related code in a middleware called auth.js
-- Add this middleware at route level in the routes where applicable.
+Also save the collegeId along with the document. Your request body contains the following fields - { name, mobile, email, collegeName}
+
+Return HTTP status 201 on a succesful document creation. Also return the document. The response should be a JSON object like this
+
+Return HTTP status 400 for an invalid request with a response body like this
+
+GET /functionup/collegeDetails
+Returns the college details for the requested college (Expect a query parameter by the name collegeName. This is anabbreviated college name. For example iith)
+Returns the list of all interns who have applied for internship at this college.
+The response structure should look like this
+Testing
+To test these apis create a new collection in Postman named Project 2 Internship
+Each api should have a new request in this collection
+Each request in the collection should be rightly named. Eg Create college, Get college details etc
+Each member of each team should have their tests in running state
 
 
 
