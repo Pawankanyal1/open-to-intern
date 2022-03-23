@@ -8,7 +8,7 @@ const isValid = function (value) {
     return true
 }
 
-// create intern....................................................
+// create intern...................................................
 
 const createIntern = async function (req, res) {
 

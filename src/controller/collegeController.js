@@ -36,7 +36,7 @@ const createCollege = async function (req, res) {
   }
 }
 
-// get college detalis......................................
+// get college detalis.....................................
 
 const collegeDetails = async function (req, res) {
   try {
