@@ -15,7 +15,7 @@ const collegeSchema = new mongoose.Schema({
         required: true,
     },
 
-    // example `Indian Institute of Technology, Hyderabad`},
+    // example `Indian Institute of Technology, Hyderabad`}
 
     logoLink: {
 

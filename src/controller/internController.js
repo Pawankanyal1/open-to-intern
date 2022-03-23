@@ -28,6 +28,8 @@ const createIntern = async function (req, res) {
             if (!(/^([+]\d{2})?\d{10}$/.test(data.mobile))) {
                 return res.status(400).send({ status: false, msg: "please provide a valid moblie Number" })
             }
+            let checkforNum = await internModel.findOne({mobile:data.mobile})
+           if(checkforNum){return res.status(400).send({msg:"mobile number already exists."})}
 
             let dupli = await internModel.findOne({ email: data.email })
 

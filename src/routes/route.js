@@ -13,5 +13,5 @@ router.get("/collegeDetails", collegeControl.collegeDetails)
 
 module.exports = router;
 
-//////////////////////////////
+/////////////////////////////
 

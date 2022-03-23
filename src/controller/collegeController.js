@@ -18,7 +18,12 @@ const createCollege = async function (req, res) {
     if (Object.keys(data).length > 0) {
 
       if (!isValid(data.name)) { return res.status(400).send({ status: false, msg: "Name is required" }) }
+      let checkForClg = await collegeModel.findOne({name:data.name})
+      if(checkForClg){return res.status(400).send({msg:"college name already exists."})}
+
       if (!isValid(data.fullName)) { return res.status(400).send({ status: false, msg: "Full Name is required" }) }
+      let checkForFullName = await collegeModel.findOne({fullName:data.fullName})
+      if(checkForFullName){return res.status(400).send({msg:"college name already exists."})}
 
       if ((/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(data.logoLink))) {
 
@@ -48,10 +53,10 @@ const collegeDetails = async function (req, res) {
     let presentInterns = await internModel.find({ collegeId: resCollege._id })
     let result = { name: resCollege.name, fullName: resCollege.fullName, logoLink: resCollege.logoLink }
     if (presentInterns.length > 0) {
-      result["Interest"] = presentInterns
+      result["Interest"] = presentInterns 
 
       return res.status(200).send({ data: result })
-    }
+     }
 
     if (presentInterns.length == 0) {
       result["Interest"] = "no interns for now";
