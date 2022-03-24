@@ -38,4 +38,4 @@ const internSchema = new mongoose.Schema({
 
 module.exports = mongoose.model('intern', internSchema);
 
-////////////////////////////////
+///////////////////////////////////
